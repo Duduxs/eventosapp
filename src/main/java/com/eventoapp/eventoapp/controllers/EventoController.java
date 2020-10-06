@@ -1,13 +1,24 @@
 package com.eventoapp.eventoapp.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.List;
 
-@Controller
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.eventoapp.eventoapp.models.Evento;
+import com.eventoapp.eventoapp.services.EventoService;
+
+@RestController
+@RequestMapping("/eventos")
 public class EventoController {
 
-	@RequestMapping("/cadastrarEvento")
-	public String form() {
-		return "Evento/formEvento";
+	@Autowired
+	private EventoService eventoService;
+	
+	@GetMapping
+	public List<Evento> form() {
+		return eventoService.findAll();
 	}
 }
